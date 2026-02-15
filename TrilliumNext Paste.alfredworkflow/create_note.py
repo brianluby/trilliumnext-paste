@@ -8,6 +8,7 @@ import os
 import urllib.request
 import urllib.error
 from datetime import datetime
+from constants import MAX_TITLE_LENGTH
 
 def create_note(url, token, parent_note_id, title, content):
     """Create a note in TrilliumNext using ETAPI"""
@@ -65,7 +66,7 @@ def main():
     
     # Extract title from first line, use rest as content
     lines = query.split('\n', 1)
-    title = lines[0][:100]  # Limit title length
+    title = lines[0][:MAX_TITLE_LENGTH]  # Limit title length
     content = query  # Keep full content including title
     
     # If no title was provided, generate one

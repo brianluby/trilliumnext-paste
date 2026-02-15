@@ -6,6 +6,7 @@ Returns JSON items for Alfred to display
 import json
 import sys
 import os
+from constants import MAX_TITLE_LENGTH
 
 def main():
     query = sys.argv[1] if len(sys.argv) > 1 else ""
@@ -37,7 +38,7 @@ def main():
     else:
         # Extract title (first line) and content
         lines = query.split('\n', 1)
-        title = lines[0][:100]  # Limit title length
+        title = lines[0][:MAX_TITLE_LENGTH]  # Limit title length
         
         items.append({
             "title": f"Save: {title}",
