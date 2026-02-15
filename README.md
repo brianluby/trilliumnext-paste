@@ -22,21 +22,42 @@ An [Alfred](https://www.alfredapp.com/) workflow to capture snippets or ideas qu
 
 ## Usage
 
+There are three ways to send content to TrilliumNext:
+
+### Keyword — type a snippet
+
 Invoke Alfred and type:
 
 ```
 tn <your snippet text>
 ```
 
-A new text note will be created in TrilliumNext with the snippet content. A notification confirms success or reports any error.
+### Clipboard — paste what you've copied
+
+Invoke Alfred and type:
+
+```
+tnc
+```
+
+This grabs the current clipboard contents and sends them as a new note.
+
+### Universal Action — send selected text
+
+1. Select text in any application.
+2. Invoke Alfred's Universal Actions (default: select text then press your Universal Action hotkey).
+3. Choose **Send to TrilliumNext** from the action list.
+
+All three methods create a new text note in TrilliumNext and show a notification confirming success or reporting any error.
 
 ## Development
 
 ```
 trilliumnext-paste/
-├── info.plist          # Alfred workflow definition
+├── info.plist              # Alfred workflow definition
 ├── scripts/
-│   └── paste.sh        # Main script — posts to TrilliumNext ETAPI
+│   ├── paste.sh            # Core script — posts content to TrilliumNext ETAPI
+│   └── paste-clipboard.sh  # Reads clipboard via pbpaste, delegates to paste.sh
 ├── LICENSE
 └── README.md
 ```
@@ -46,7 +67,15 @@ To test the script outside Alfred, export the required variables and run directl
 ```bash
 export TRILLIUMNEXT_URL="http://localhost:37840"
 export TRILLIUMNEXT_TOKEN="your-etapi-token"
+
+# Type input directly
 ./scripts/paste.sh "Test snippet"
+
+# Pipe input
+echo "Piped content" | ./scripts/paste.sh
+
+# Clipboard (macOS only)
+./scripts/paste-clipboard.sh
 ```
 
 ## License

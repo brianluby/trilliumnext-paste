@@ -9,7 +9,15 @@
 
 set -euo pipefail
 
-query="$1"
+# Accept input as $1, or read from stdin if no argument given
+if [ $# -ge 1 ] && [ -n "$1" ]; then
+  query="$1"
+elif [ ! -t 0 ]; then
+  query=$(cat)
+else
+  echo "No input provided"
+  exit 1
+fi
 
 if [ -z "$query" ]; then
   echo "No input provided"
