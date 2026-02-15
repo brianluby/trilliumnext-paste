@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>format</key>
+	<string>alfred5</string>
 	<key>bundleid</key>
 	<string>com.brianluby.trilliumnext-paste</string>
 	<key>category</key>
